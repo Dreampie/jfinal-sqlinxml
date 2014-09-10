@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<sqlRoot>
+
+  <sqlGroup name="user">
+    <sql id="findInfoBySelect">SELECT `user`.*,`userInfo`.street street,`userInfo`.gender gender,
+      `userInfo`.zip_code zip_code,`province`.name province,`city`.name city,`county`.name
+      county,`userRole`.role_id role_id
+    </sql>
+  </sqlGroup>
+
+</sqlRoot>
