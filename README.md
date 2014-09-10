@@ -1,4 +1,4 @@
-jfinal-slf4j
+jfinal-sqlinxml
 ============
 
-jfinal  slf4j  log api
+jfinal  sqlinxml plugin
