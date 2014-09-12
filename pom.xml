@@ -8,6 +8,7 @@
   <artifactId>jfinal-sqlinxml</artifactId>
   <version>0.1</version>
   <packaging>jar</packaging>
+  <name>jfinal-sqlinxml</name>
   <description>jfinal sqlinxml plugins</description>
   <url>https://github.com/Dreampie/jfinal-sqlinxml</url>
 
