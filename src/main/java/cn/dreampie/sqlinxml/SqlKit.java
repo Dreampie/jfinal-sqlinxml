@@ -48,11 +48,22 @@ public class SqlKit {
   static void init() {
     sqlMap = new HashMap<String, String>();
     //加载sql文件
-    URL baseURL = SqlKit.class.getClassLoader().getResource("/sql");
-    if (baseURL == null) {
-      baseURL = SqlKit.class.getClassLoader().getResource("/");
+    Enumeration<URL> baseURLs = null;
+    try {
+      baseURLs = SqlKit.class.getClassLoader().getResources("sql");
+
+      if (baseURLs == null) {
+        baseURLs = SqlKit.class.getClassLoader().getResources("");
+      }
+      URL url = null;
+      while (baseURLs.hasMoreElements()) {
+        url = baseURLs.nextElement();
+        loadFilePath(url);
+      }
+
+    } catch (IOException e) {
+      e.printStackTrace();
     }
-    loadFilePath(baseURL);
     LOG.debug("sqlMap" + sqlMap);
   }
 
@@ -60,11 +71,25 @@ public class SqlKit {
     sqlMap = new HashMap<String, String>();
 
     for (String path : paths) {
-      if (!path.startsWith("/")) {
-        path += "/" + path;
+      if (path.startsWith("/")) {
+        path += path.substring(1);
       }
-      URL baseURL = SqlKit.class.getClassLoader().getResource(path);
-      loadFilePath(baseURL);
+      Enumeration<URL> baseURLs = null;
+      try {
+        baseURLs = SqlKit.class.getClassLoader().getResources(path);
+
+        if (baseURLs == null) {
+          baseURLs = SqlKit.class.getClassLoader().getResources("");
+        }
+        URL url = null;
+        while (baseURLs.hasMoreElements()) {
+          url = baseURLs.nextElement();
+          loadFilePath(url);
+        }
+
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
     }
     LOG.debug("sqlMap" + sqlMap);
   }
