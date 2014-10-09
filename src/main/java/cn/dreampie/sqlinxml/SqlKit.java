@@ -159,6 +159,12 @@ public class SqlKit {
     localJarFile.close();
   }
 
+  /**
+   * 从jar里加载文件
+   * @param localJarFile 文件路径
+   * @param packageName 包名
+   * @return
+   */
   private static Map<String, InputStream> findInJar(JarFile localJarFile, String packageName) {
     Map<String, InputStream> sqlFiles = Maps.newHashMap();
     Enumeration<JarEntry> entries = localJarFile.entries();
