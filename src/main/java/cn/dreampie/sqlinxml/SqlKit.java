@@ -19,11 +19,9 @@ import cn.dreampie.jaxb.JaxbKit;
 import com.google.common.collect.Maps;
 import com.jfinal.log.Logger;
 
-import java.io.File;
-import java.io.FileFilter;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.URL;
+import java.net.URLDecoder;
 import java.util.*;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
@@ -102,7 +100,7 @@ public class SqlKit {
         String[] pathurls = basePath.split("!/");
         // 获取jar
         try {
-          loadJarFileList(pathurls[0].replace("file:", ""), pathurls[1]);
+          loadJarFileList(URLDecoder.decode(pathurls[0].replace("file:", ""), "UTF-8"), pathurls[1]);
         } catch (IOException e) {
           e.printStackTrace();
         }
@@ -161,8 +159,9 @@ public class SqlKit {
 
   /**
    * 从jar里加载文件
+   *
    * @param localJarFile 文件路径
-   * @param packageName 包名
+   * @param packageName  包名
    * @return
    */
   private static Map<String, InputStream> findInJar(JarFile localJarFile, String packageName) {
